@@ -27,7 +27,7 @@ const SearchComponent = () => {
                         <input type='text' className='text-midnightBlue bg-transparent focus:outline-none mx-2 w-[100%]' placeholder="Search by location" />
                         <AiOutlineCloseCircle className='tapIcon text-[25px] text-gray hover:text-vibrantCoral icon' />
                     </div>
-                    <button className="bg-vibrantCoral rounded-[10px] px-10 py-5 text-white cursor-pointer hover:bg-darkVibrantCoral"> Search  </button>
+                    <button className="bg-googlePlava rounded-[10px] px-10 py-5 text-white cursor-pointer hover:bg-navyBlue"> Search  </button>
                 </div>
 
 

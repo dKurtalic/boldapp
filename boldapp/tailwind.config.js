@@ -31,7 +31,9 @@ export default {
         textColor: '#1b1b1b',
         lightSand: '#e8e6e3',
         lightMint: '#e8edec',
-        gray: '#888a89'
+        gray: '#888a89',
+        lightGray: '#f4f6f9',
+        googlePlava: '#007bff'
       }
     },
   },
