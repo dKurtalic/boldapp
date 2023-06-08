@@ -5,10 +5,10 @@ import { GrUserManager, GrLocation } from 'react-icons/gr'
 
 const SearchComponent = () => {
     return (
-        <div className="bg-lightMint grid p-[3rem] rounded-md w-[90%] m-auto gp-10 gap-5 items-center">
+        <div className="bg-lightMint grid p-[3rem] rounded-xl w-[90%] m-auto gp-10 gap-5 items-center ">
 
             <form action="">
-                <div className="m-auto p-[1rem] justify-between flex bg-slate-100 shadow-md gap-10 shadow-slate-400 rounded-md">
+                <div className="m-auto p-[1rem] justify-between flex flex-wrap bg-slate-100 shadow-md gap-10 shadow-slate-400 rounded-lg">
 
                     <div className='flex items-center gap-2'>
                         <BsSearch className='tapIcon  text-[25px]' />
@@ -27,14 +27,14 @@ const SearchComponent = () => {
                         <input type='text' className='text-midnightBlue bg-transparent focus:outline-none mx-2 w-[100%]' placeholder="Search by location" />
                         <AiOutlineCloseCircle className='tapIcon text-[25px] text-gray hover:text-vibrantCoral icon' />
                     </div>
-                    <button className="bg-googlePlava rounded-[10px] px-10 py-5 text-white cursor-pointer hover:bg-navyBlue"> Search  </button>
+                    <button className="bg-googlePlava rounded-lg px-10 py-5 text-white cursor-pointer hover:bg-navyBlue"> Search  </button>
                 </div>
 
 
             </form>
 
 
-            <div className='flex items-center justify-center gap-16'>
+            <div className='flex flex-wrap items-center justify-center gap-16'>
                 <div>
                     <label htmlFor='relevance' className='text-midnightBlue font-semibold'>Sort by</label>
                     <select name="" id="relevance" className="rounded-[10px] outline-none mx-5 px-5">
@@ -62,7 +62,7 @@ const SearchComponent = () => {
                     </select>
                 </div>
 
-                <span className="text-gray cursor-pointer">Clear all</span>
+                <div className="text-gray cursor-pointer">Clear all</div>
             </div>
         </div>
     )
