@@ -16,8 +16,8 @@ const NavBar = () => {
             </Link>
             <div className="menu flex px-[2.5rem] gap-8 text-[1.2rem]">
                 <li className="menuList hover:text-vibrantCoral "><Link to="/explore">Explore</Link></li>
-                <li className="menuList hover:text-vibrantCoral">Register</li>
-                <li className="menuList hover:text-vibrantCoral">Sign in</li>
+                <Link to="/register"><li className="menuList hover:text-vibrantCoral">Register</li></Link>
+                <Link to="/signin"><li className="menuList hover:text-vibrantCoral">Sign in</li></Link>
             </div>
         </div>
 
