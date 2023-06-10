@@ -1,17 +1,37 @@
 const express = require('express')
 const router = express.Router();
+const User = require('./models/User')
+const { createUser, getAllUsers, getUser, deleteUser, updateUser } = require('./controllers/userController')
+const { createStartup, deleteStartup, updateStartup, getAllStartups, getStartup } = require('./controllers/startupController')
+const { getApplicationsFromUser, createApplication, deleteApplication, updateApplication, getAllApplications, getApplication } = require('./controllers/applicationController')
+
+
 
 router.get('/', (req, res) => {
     res.json({ mssg: 'evoo pocetak' });
 })
-
-
 router.get('/signin', (req, res) => {
     res.json({ mssg: 'signin' });
 })
+router.post('/users/register', createUser)
+router.get('/users', getAllUsers);
+router.get('/user/:id', getUser)
+router.delete('/user/:id', deleteUser)
+router.patch('/user/:id', updateUser)
 
-router.get('/:id', (req, res) => {
-    res.json({ mssg: 'id je ' });
-})
+router.post('/startup/create', createStartup)
+router.get('/startups', getAllStartups);
+router.get('/startup/:id', getStartup)
+router.delete('/startup/:id', deleteStartup)
+router.patch('/startup/:id', updateStartup)
+
+
+router.post('/application/create', createApplication)
+router.get('/applications', getAllApplications);
+router.get('/application/:id', getApplication)
+router.get('/applications/:userId', getApplicationsFromUser)
+router.delete('/application/:id', deleteApplication)
+router.patch('/application/:id', updateApplication)
+
 
 module.exports = router
