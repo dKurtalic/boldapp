@@ -3,6 +3,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+
+
 const RegistrationForm = () => {
     return (
         <div className='bg-lightGray w-96 mx-auto shadow-lg rounded-lg p-5'>

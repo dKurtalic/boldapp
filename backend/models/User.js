@@ -30,6 +30,10 @@ const userSchema = new Schema({
     startupIds: {
         type: [Schema.Types.ObjectId],
         ref: 'Startup'
+    },
+    likedStartups: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Startup'
     }
 }, { timestamps: true })
 
