@@ -12,6 +12,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    confirmedEmail: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         required: true
@@ -20,8 +24,17 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    dateOfBirth: {
+    country: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    },
+    birthDate: {
         type: Date
+    },
+    occupation: {
+        type: String
     },
     skills: {
         type: [String]
@@ -36,6 +49,9 @@ const userSchema = new Schema({
         ref: 'Startup'
     }
 }, { timestamps: true })
+
+
+
 
 const User = mongoose.model('User', userSchema);
 

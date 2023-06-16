@@ -1,60 +1,154 @@
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 
 
 const RegistrationForm = () => {
+
+    const formRef = useRef()
+    const [form, setForm] = useState({
+        fullName: '',
+        birthDate: '',
+        email: '',
+        city: '',
+        country: '',
+        zipCode: '',
+        occupation: '',
+        password: ''
+    })
+    const [loading, setLoading] = useState(false)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'dateOfBirth') {
+            const date = new Date(value);
+            const formattedDate = date.toISOString().split('T')[0];
+            setForm({ ...form, birthDate: formattedDate });
+        } else {
+            setForm({ ...form, [name]: value });
+        }
+    };
+
+
+
+
+
+    const handleSumbit = async (e) => {
+        e.preventDefault();
+
+        if (!form.fullName || !form.email || !form.password || !form.city || !form.country) {
+            if (!form.fullName) console.log("name")
+            if (!form.email) console.log("email")
+            if (!form.password) console.log("password")
+            if (!form.location) console.log("location")
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await fetch('http://localhost:4000/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName: form.fullName,
+                    email: form.email,
+                    password: form.password,
+                    city: form.city,
+                    country: form.country,
+                    zipCode: form.zipCode,
+                    birthDate: form.birthDate,
+                    occupation: form.occupation
+
+                }),
+            });
+
+            if (response.ok) {
+                const newUser = await response.json();
+                console.log('New user created:', newUser);
+            } else {
+                const errorData = await response.json();
+                console.error('Registration failed:', errorData.error);
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+
+        setLoading(false);
+    };
+
+
     return (
         <div className='bg-lightGray w-96 mx-auto shadow-lg rounded-lg p-5'>
             <h2 className='font-bold text-textColor text-2xl lg:justify-end'>Register</h2>
             <p className='text-xs my-4 text-textColor'>
                 If you are not yet a member, register now!
             </p>
-            <form action='' className='flex flex-col gap-4'>
+            <form
+                ref={formRef}
+                onSubmit={handleSumbit}
+                className='flex flex-col gap-4'>
                 <div className="grid grid-cols-2 gap-4">
                     <input
                         className='p-2 rounded-xl border'
                         type='text'
                         name='fullName'
                         placeholder='Full Name'
+                        onChange={handleChange}
+                        value={form.fullName}
                     />
                     <input
                         className='p-2 rounded-xl border'
                         type='date'
                         name='dateOfBirth'
                         placeholder='Date of Birth'
+                        onChange={handleChange}
+                        value={form.birthDate}
                     />
                     <input
                         className='p-2 rounded-xl border'
                         type='email'
                         name='email'
                         placeholder='Email Address'
+                        onChange={handleChange}
+                        value={form.email}
                     />
                     <input
                         className='p-2 rounded-xl border'
                         type='text'
                         name='city'
+                        onChange={handleChange}
                         placeholder='City'
+                        value={form.city}
                     />
                     <input
                         className='p-2 rounded-xl border'
                         type='text'
                         name='country'
                         placeholder='Country'
+                        onChange={handleChange}
+                        value={form.country}
                     />
                     <input
                         className='p-2 rounded-xl border'
                         type='text'
                         name='zipCode'
+                        onChange={handleChange}
                         placeholder='Zip Code'
+                        value={form.zipCode}
                     />
                 </div>
                 <select
                     className='p-2 rounded-xl border'
                     name='occupation'
                     id='occupation'
+                    onChange={handleChange}
+                    value={form.occupation}
                 >
                     <option value=''>Select Occupation</option>
                     <option value='student'>Student</option>
@@ -62,7 +156,15 @@ const RegistrationForm = () => {
                     <option value='founder'>Founder</option>
                     <option value='freelancer'>Freelancer</option>
                 </select>
-                <button className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
+                <input
+                    type='password'
+                    className='p-2 rounded-xl border'
+                    name='password'
+                    onChange={handleChange}
+                    value={form.password}
+                    placeholder='Password'
+                />
+                <button onClick={handleSumbit} className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
                     Register
                 </button>
             </form>

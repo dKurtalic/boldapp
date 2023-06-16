@@ -22,13 +22,30 @@ const StartupContainer = () => {
         fetchStartupData()
     }, [])
 
-    console.log(startupData)
 
+    function createDateFromString(dateString) {
+        console.log("Uslo " + dateString)
+        dateString = JSON.stringify(dateString)
+        console.log("Sad je " + dateString)
+        const year = parseInt(dateString.substring(14, 18));
+        const month = parseInt(dateString.substring(19, 21));
+        const day = parseInt(dateString.substring(22, 24));
+
+        console.log("year " + year + ", month " + month + " day " + day)
+
+        const newDate = new Date(year, month - 1, day);
+
+        return newDate;
+    }
     return (
         <div className='m-auto grid grid-cols-[repeat(auto-fit,minmax(410px,1fr))] gap-2 justify-items-center w-[95%]'>
 
             {
-                startupData && startupData.map(({ name, description, openPositions, createdAt, logo, city }) => {
+                startupData && startupData.map(({ name, description, openPositions, createdAt, logo, location }) => {
+                    const date = createDateFromString({ createdAt }).toLocaleDateString('en-GB');
+
+
+
                     return (
 
 
@@ -43,7 +60,7 @@ const StartupContainer = () => {
                                         </div>
                                         <div className='flex '>
                                             <TfiLocationPin className='text-gray mr-2 mt-1 text-[15px] items-center' />
-                                            <h6 className='text-gray group-hover:text-white text-[15px]'>{city}</h6>
+                                            <h6 className='text-gray group-hover:text-white text-[15px]'>{location}</h6>
                                         </div>
                                     </div>
                                     < AiOutlineHeart className='text-[30px] hover:text-white m-1' />
@@ -52,7 +69,7 @@ const StartupContainer = () => {
                             </div>
                             <div className="border-t-2 mt-8 border-gray group-hover:border-white"></div>
                             <div className='text-gray group-hover:text-white mt-3 ' >
-                                {description.length > 100 ? descr.slice(0, 100) + "..." : description}
+                                {description.length > 100 ? description.slice(0, 100) + "..." : description}
                             </div>
 
 
@@ -69,7 +86,7 @@ const StartupContainer = () => {
 
                             </div>
                             <div className='pt-4 flex justify-between items-center relative bottom-0'>
-                                <div className='text-gray group-hover:text-white'>Posted: {createdAt}</div>
+                                <div className='text-gray group-hover:text-white'>Posted: {date}</div>
                                 <button className='border-[0.5px]  border-navyBlue rounded-[10px] block p-2 font-semibold text-textColor  hover:bg-navyBlue group-hover:text-white'>Apply</button>
                             </div>
 

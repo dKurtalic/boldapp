@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const User = require('./models/User')
-const { createUser, getAllUsers, getUser, deleteUser, updateUser } = require('./controllers/userController')
+const { createUser, getAllUsers, getUser, deleteUser, updateUser, loginUser } = require('./controllers/userController')
 const { createStartup, deleteStartup, updateStartup, getAllStartups, getStartup } = require('./controllers/startupController')
 const { getApplicationsFromUser, createApplication, deleteApplication, updateApplication, getAllApplications, getApplication } = require('./controllers/applicationController')
 
@@ -14,6 +14,7 @@ router.get('/signin', (req, res) => {
     res.json({ mssg: 'signin' });
 })
 router.post('/users/register', createUser)
+router.post('/users/login', loginUser)
 router.get('/users', getAllUsers);
 router.get('/user/:id', getUser)
 router.delete('/user/:id', deleteUser)

@@ -35,6 +35,9 @@ const startupSchema = new Schema({
     video: {
         type: String
     },
+    location: {
+        type: String
+    }
 
 }, { timestamps: true });
 
