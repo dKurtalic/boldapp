@@ -35,7 +35,7 @@ const RegistrationForm = () => {
 
 
 
-    const handleSumbit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!form.fullName || !form.email || !form.password || !form.city || !form.country) {
@@ -73,10 +73,10 @@ const RegistrationForm = () => {
                 console.log('New user created:', newUser);
             } else {
                 const errorData = await response.json();
-                console.error('Registration failed:', errorData.error);
+                console.error('Registration failed:' + errorData.error);
             }
         } catch (error) {
-            console.error('Error:', error.message);
+            console.error('Error:' + error.message);
         }
 
         setLoading(false);
@@ -91,7 +91,7 @@ const RegistrationForm = () => {
             </p>
             <form
                 ref={formRef}
-                onSubmit={handleSumbit}
+                onSubmit={handleSubmit}
                 className='flex flex-col gap-4'>
                 <div className="grid grid-cols-2 gap-4">
                     <input
@@ -164,7 +164,7 @@ const RegistrationForm = () => {
                     value={form.password}
                     placeholder='Password'
                 />
-                <button onClick={handleSumbit} className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
+                <button onClick={handleSubmit} className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
                     Register
                 </button>
             </form>

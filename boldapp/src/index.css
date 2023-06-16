@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Poppins:wght@200;300;400;600;800&display=swap');
 @tailwind base;
 @tailwind components;
-@tailwind utilities;       
+@tailwind utilities;
 
-:root{
+:root {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 
 }
 
-li{
+li {
   list-style-type: none;
   cursor: pointer;
 }
@@ -23,7 +23,8 @@ li{
   content: '';
   height: 2px;
   width: 100%;
-  background: var(--color-vibrantCoral); /* Using the 'vibrantCoral' color from your Tailwind config */
+  background: var(--color-vibrantCoral);
+  /* Using the 'vibrantCoral' color from your Tailwind config */
   left: 0;
   bottom: -2px;
   opacity: 0;
@@ -34,6 +35,15 @@ li{
   opacity: 1;
 }
 
-.tapIcon{
+.tapIcon {
   cursor: pointer;
+}
+
+.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid #ec2c2c;
+  color: #f96868;
+  border-radius: 4px;
+  margin: 20px 0;
 }
