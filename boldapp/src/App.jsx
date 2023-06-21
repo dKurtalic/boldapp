@@ -6,6 +6,7 @@ import ExplorePage from './screens/ExplorePage'
 import RegisterPage from './screens/RegisterPage'
 import SignInPage from './screens/SignInPage'
 import ForgotPassword from './screens/ForgotPassword';
+import StartupPage from './screens/StartupPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/startupDetails/:startupName" element={<StartupPage />} />
       </Routes>
     </Router>
   )

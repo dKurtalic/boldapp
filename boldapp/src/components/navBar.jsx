@@ -30,7 +30,7 @@ const NavBar = () => {
                     <div className='menuList hover:text-vibrantCoral'>
                         <button onClick={handleClick}>Log out</button>
                     </div>
-                    <span>{user.email}</span>
+                    <div className=' text-xs'>{user.email}</div>
                 </div>
                 )}
 

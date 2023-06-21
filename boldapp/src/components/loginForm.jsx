@@ -44,6 +44,7 @@ const LoginForm = () => {
 
                 setLoading(false);
                 console.log('Logged in');
+                window.location.href = '/explore'
             } else {
                 setLoading(false)
                 setError("Log in failed")

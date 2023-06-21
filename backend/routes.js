@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const User = require('./models/User')
 const { createUser, getAllUsers, getUser, deleteUser, updateUser, loginUser } = require('./controllers/userController')
-const { createStartup, deleteStartup, updateStartup, getAllStartups, getStartup } = require('./controllers/startupController')
+const { createStartup, deleteStartup, updateStartup, getAllStartups, getStartup, getStartupDetails } = require('./controllers/startupController')
 const { getApplicationsFromUser, createApplication, deleteApplication, updateApplication, getAllApplications, getApplication } = require('./controllers/applicationController')
 
 
@@ -21,7 +21,7 @@ router.delete('/user/:id', deleteUser)
 router.patch('/user/:id', updateUser)
 
 router.post('/startup/create', createStartup)
-router.get('/startups', getAllStartups);
+router.get('/startups', getAllStartups)
 router.get('/startup/:id', getStartup)
 router.delete('/startup/:id', deleteStartup)
 router.patch('/startup/:id', updateStartup)
@@ -33,6 +33,8 @@ router.get('/application/:id', getApplication)
 router.get('/applications/:userId', getApplicationsFromUser)
 router.delete('/application/:id', deleteApplication)
 router.patch('/application/:id', updateApplication)
+
+router.get('/startupDetails/:startupName', getStartupDetails);
 
 
 module.exports = router

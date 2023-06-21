@@ -29,6 +29,12 @@ const startupSchema = new Schema({
             filePath: String
         }]
     },
+    photos: {
+        type: [String]
+    },
+    coverPhoto: {
+        type: String
+    },
     logo: {
         type: String
     },
