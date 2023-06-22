@@ -98,7 +98,9 @@ const StartupPage = () => {
                         {
                             startupData.openPositions &&
                             startupData.openPositions.map((position) => {
-                                return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5'>{position}</button>
+                                return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position.jobTitle}` }}>
+                                    {position.jobTitle}
+                                </button>
                             })
                         }
                     </div>

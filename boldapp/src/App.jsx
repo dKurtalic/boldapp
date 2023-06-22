@@ -7,6 +7,7 @@ import RegisterPage from './screens/RegisterPage'
 import SignInPage from './screens/SignInPage'
 import ForgotPassword from './screens/ForgotPassword';
 import StartupPage from './screens/StartupPage';
+import JobPage from './screens/JobPage';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/startupDetails/:startupName" element={<StartupPage />} />
+        <Route path="/startupDetails/:startupName/:jobTitle" element={<JobPage />} />
       </Routes>
     </Router>
   )

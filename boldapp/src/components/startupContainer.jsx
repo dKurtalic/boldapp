@@ -65,7 +65,7 @@ const StartupContainer = () => {
                                     {openPositions.map((element) => {
                                         return (
                                             <div className='rounded-md bg-lightGray inline-block p-2'>
-                                                {element}
+                                                {element.jobTitle}
                                             </div>)
                                     })}
 

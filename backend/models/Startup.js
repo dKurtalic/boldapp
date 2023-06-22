@@ -20,9 +20,14 @@ const startupSchema = new Schema({
     skillsNeeded: {
         type: [String]
     },
-    openPositions: {
-        type: [String]
-    },
+    openPositions: [{
+        jobTitle: String,
+        jobDescription: String,
+        keyResponsibilities: [String],
+        requirements: [String]
+    }]
+    ,
+
     additionalFiles: {
         type: [{
             fileName: String,

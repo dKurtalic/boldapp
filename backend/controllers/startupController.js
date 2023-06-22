@@ -56,6 +56,22 @@ const getStartupDetails = async (req, res) => {
     }
 }
 
+const getJobAtStartup = async (req, res) => {
+    try {
+        const startupName = req.params.startupName;
+        const jobTitle = req.params.jobTitle;
+
+        const job = await Startup.find({ "openPositions.jobTitle": jobTitle }, { "openPositions.$": 1 })
+        if (!job || job.length === 0) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+        res.json(job)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
+
 const deleteStartup = async (req, res) => {
     try {
         const startupId = req.params.id;
@@ -96,5 +112,6 @@ module.exports = {
     getStartup,
     deleteStartup,
     updateStartup,
-    getStartupDetails
+    getStartupDetails,
+    getJobAtStartup
 }
