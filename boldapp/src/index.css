@@ -10,7 +10,6 @@
 }
 
 li {
-  list-style-type: none;
   cursor: pointer;
 }
 
@@ -46,4 +45,31 @@ li {
   color: #f96868;
   border-radius: 4px;
   margin: 20px 0;
+}
+
+ul.specialBullets {
+  list-style: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul.specialBullets li {
+  display: inline-block;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+
+}
+
+ul.specialBullets li:before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  top: 6px;
+  height: 15px;
+  margin-right: 0.5rem;
+  background-image: url("./res/check.png");
+  background-size: cover;
 }

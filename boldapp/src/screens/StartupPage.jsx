@@ -78,7 +78,7 @@ const StartupPage = () => {
                     </div>
 
 
-                    {startupData.photos &&
+                    {startupData.photos && startupData.photos.length > 0 &&
                         <div className=' mt-10'>
                             <div className='gap-4 px-8  flex pb-5 justify-center items-center '>
                                 <div className=' w-[80%] overflow-x-scroll gap-8 flex cursor-pointer relative group  mb-2 bg-neutral-800  rounded-md p-4'>
