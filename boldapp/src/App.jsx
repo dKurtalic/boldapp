@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/startupDetails/:startupName" element={<StartupPage />} />
-        <Route path="/startupDetails/:startupName/:jobTitle" element={<JobPage />} />
+        <Route path="/startupDetails/:startupName/:jobId" element={<JobPage />} />
       </Routes>
     </Router>
   )

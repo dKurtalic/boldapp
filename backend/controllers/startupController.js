@@ -40,7 +40,7 @@ const getStartup = async (req, res) => {
     }
 }
 
-const getStartupDetails = async (req, res) => {
+const getStartupByName = async (req, res) => {
     try {
         const startupName = req.params.startupName;
 
@@ -112,6 +112,6 @@ module.exports = {
     getStartup,
     deleteStartup,
     updateStartup,
-    getStartupDetails,
+    getStartupByName,
     getJobAtStartup
 }

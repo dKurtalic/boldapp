@@ -8,9 +8,8 @@ import '../index.css';
 
 
 const makeBulletPoints = (tekst) => {
-    const text = tekst.toString();
-    const lines = text.split('\n');
-    const bulletPoints = lines.map((line, index) => (
+
+    const bulletPoints = tekst.map((line, index) => (
         <li key={index} className='items-center'><span>{line}</span></li>
     ));
     return (
@@ -20,10 +19,11 @@ const makeBulletPoints = (tekst) => {
     );
 };
 const JobPage = () => {
-    const { startupName, jobTitle } = useParams()
+    const { startupName, jobId } = useParams()
 
 
-    const jobUrl = "http://localhost:4000/startupDetails/" + startupName + "/" + jobTitle;
+    const jobUrl = "http://localhost:4000/position/" + jobId;
+
 
     const startupurl = "http://localhost:4000/startupDetails/" + startupName;
     const [jobData, setJobData] = useState(null)
@@ -46,33 +46,36 @@ const JobPage = () => {
     }, [])
 
 
-
-
     return (
         <div>
             {startupData && jobData &&
-                <div className='mb-20 r  '>
+                <div className='mb-20 '>
                     <StartupHeader name={startupName} logo={startupData.logo} coverPhoto={startupData.coverPhoto} />
+                    <div className='mt-[3rem]  gap-[3rem] lg:flex justify-center  mx-10 '>
 
-                    <div className='mt-[3rem]  gap-[3rem] flex justify-center  '>
-
-
-                        <div className=' w-[50%]'>
+                        <div className='lg:w-[60%] '>
+                            <div className='flex justify-between'>
+                                <div className='font-bold text-3xl mb-[3rem] '>{jobData.jobTitle}</div>
+                                <div className='flex items-start mx-5'>
+                                    <div className='bottom-5 right-5'> <button className='rounded-full  mx-2 bg-blueGray px-7 text-white py-2'>{jobData.level}</button></div>
+                                    <div className='bottom-5 right-5'> <button className='rounded-full mx-2 bg-lightGreen px-7 text-white py-2'>{jobData.type}</button></div>
+                                </div>
+                            </div>
                             <div className=''>
                                 <div className=' font-bold text-lg mb-2'>Job Description</div>
-                                {jobData[0].openPositions[0].jobDescription}
+                                {jobData.jobDescription}
                                 <div></div>
                             </div>
 
                             <div className='mt-[3rem] '>
                                 <div className=' font-bold text-lg mb-2'>Key responsibilities</div>
-                                {makeBulletPoints(jobData[0].openPositions[0].keyResponsibilities)}
+                                {makeBulletPoints(jobData.keyResponsibilities)}
                                 <div></div>
                             </div>
 
                             <div className='mt-[3rem] '>
                                 <div className=' font-bold text-lg mb-2'>Requirements</div>
-                                {jobData[0].openPositions[0].requirements}
+                                {makeBulletPoints(jobData.requirements)}
                                 <div></div>
                             </div>
 
@@ -83,9 +86,10 @@ const JobPage = () => {
 
                         <div className='border-l-2 border-gray ' />
 
-                        <div>
-                            <div className='grid grid-flow-row '>
-                                <div className=' font-bold text-xl mb-3'> About</div>
+                        <div >
+                            <div className=' font-bold text-xl mb-3 sm:m-10 md:m-10'> About</div>
+
+                            <div className='grid lg:grid-flow-row md:grid-flow-col  md:justify-center sm:justify-center gap-10'>
 
                                 <div>
                                     <div className='flex  mb-3'>

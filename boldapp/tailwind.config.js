@@ -33,7 +33,9 @@ export default {
         lightMint: '#e8edec',
         gray: '#888a89',
         lightGray: '#f4f6f9',
-        googlePlava: '#007bff'
+        googlePlava: '#007bff',
+        lightGreen: '#83EAB8',
+        blueGray: '#7EA5CF'
       }
     },
   },

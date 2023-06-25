@@ -40,14 +40,19 @@ const userSchema = new Schema({
         type: [String]
     },
     interests: [String],
-    startupIds: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Startup'
-    },
     likedStartups: {
         type: [Schema.Types.ObjectId],
         ref: 'Startup'
+    },
+    appliedForPositions: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Position'
+    },
+    positions: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Position'
     }
+
 }, { timestamps: true })
 
 

@@ -5,35 +5,55 @@ import { useEffect } from 'react';
 import { TiLocation } from 'react-icons/ti'
 import createDateFromString from '../functions/dateFromString';
 
-console.log("dosla")
+
 const StartupPage = () => {
     const { startupName } = useParams()
 
     const url = "http://localhost:4000/startupDetails/" + startupName;
     const [startupData, setStartupData] = useState(null);
+    const [positions, setPositions] = useState(null);
+    const [date, setDate] = useState(null)
 
     const fetchStartupData = async () => {
         const response = await fetch(url)
         const json = await response.json()
 
         if (response.ok) {
-            const { _id, name, description, coverPhoto, location } = json
+            const { _id, name, description, coverPhoto, location, createdAt } = json
+            console.log(createdAt)
             setStartupData(json)
+            setDate(createDateFromString(createdAt))
+
         }
     }
+
+    const getPositionsAtStartup = async () => {
+
+        if (startupData) {
+            const response = await fetch(`http://localhost:4000/startup/${startupData._id}/positions`)
+            if (response.ok) {
+                const positions = await response.json()
+                console.log("e ovdje sad imam ")
+                console.log(positions)
+                setPositions(positions)
+            }
+        }
+    }
+
+
     useEffect(() => {
         fetchStartupData()
+
     }, [])
 
-
-
-    if (startupData != null) console.log("Members: " + startupData.members.length)
-    else console.log("still null")
+    useEffect(() => {
+        getPositionsAtStartup()
+    }, [startupData])
 
     return (
 
         <div className='justify-center'>
-            {startupData &&
+            {startupData && positions &&
                 <div className='mb-20 justify-center items-center'>
                     <StartupHeader coverPhoto={startupData.coverPhoto} name={startupData.name} logo={startupData.logo} />
 
@@ -53,7 +73,7 @@ const StartupPage = () => {
                             <div>
                                 <div className='flex items-center mb-3'>
                                     <TiLocation className='mr-2 text-xl text-black ' />
-                                    <div className=' font-semibold text-xl '>Join date</div>
+                                    <div className=' font-semibold text-xl '>Location</div>
                                 </div>
                                 <div className=' text-xl  mb-4 font-normal' >{startupData.location}</div>
                             </div>
@@ -63,7 +83,7 @@ const StartupPage = () => {
                                     <TiLocation className='mr-2 text-xl text-black ' />
                                     <div className=' font-semibold text-xl '>Join date</div>
                                 </div>
-                                <div className=' text-xl  mb-4 font-medium' >05/05/2005</div>
+                                <div className=' text-xl  mb-4 font-normal' >{date}</div>
                             </div>
 
                             <div>
@@ -92,19 +112,21 @@ const StartupPage = () => {
                         </div>
                     }
 
+                    {positions && positions.length > 0 ? (
+                        < div className=' ml-[10rem]'>
+                            <div className='mt-10 text-xl font-semibold mb-5'>Positions needed:</div>
+                            {
 
-                    <div className=' ml-[10rem]'>
-                        <div className='mt-10 text-xl font-semibold mb-5'>Positions needed:</div>
-                        {
-                            startupData.openPositions &&
-                            startupData.openPositions.map((position) => {
-                                return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position.jobTitle}` }}>
-                                    {position.jobTitle}
-                                </button>
-                            })
-                        }
-                    </div>
-
+                                positions.map((position) => {
+                                    return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position._id}` }}>
+                                        {position.jobTitle}
+                                    </button>
+                                })
+                            }
+                        </div>) : (
+                        <div className='mt-10 ml-[10rem] text-lg font-semibold mb-5'>There are currently no open positions available.</div>
+                    )
+                    }
 
 
 
@@ -116,8 +138,17 @@ const StartupPage = () => {
                 </div>
             }
 
-        </div>
+        </div >
     )
 }
 
 export default StartupPage
+
+/* {
+                            positions &&
+                            positions.map((position) => {
+                                return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position.jobTitle}` }}>
+                                    {position.jobTitle}
+                                </button>
+                            })
+                        } */
