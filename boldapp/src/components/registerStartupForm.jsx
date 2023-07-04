@@ -44,6 +44,26 @@ const RegisterStartupForm = () => {
         setLoading(true);
 
         try {
+
+
+            const founderUrl = 'http://localhost:4000/userByEmail/' + user.email;
+            console.log("Founder url " + founderUrl)
+            let founder = null;
+            const founderResponse = await fetch(founderUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (founderResponse.ok) {
+                founder = await founderResponse.json();
+                console.log("Founder je ", founder);
+            } else {
+                console.log("ejoj");
+            }
+
+
             const response = await fetch('http://localhost:4000/startup/create', {
                 method: 'POST',
                 headers: {
@@ -51,12 +71,16 @@ const RegisterStartupForm = () => {
                 },
                 body: JSON.stringify({
                     name: form.name,
-                    description: form.description
+                    description: form.description,
+                    members: [{ user: founder, position: "Founder" }],
+                    logo: form.logo
                 }),
             });
 
             if (response.ok) {
                 const newStartup = await response.json();
+                const url = '/startupDetails/' + newStartup.name
+                window.location.href = url
 
             } else {
                 const errorData = await response.json();
@@ -94,33 +118,30 @@ const RegisterStartupForm = () => {
                         onChange={handleChange}
                         value={form.foundingDate}
                     />
-                    <input
-                        className='p-2 rounded-xl border'
-                        type='text'
-                        name='description'
-                        placeholder='Describe your startup'
-                        onChange={handleChange}
-                        value={form.description}
-                    />
-                    <input
-                        className='p-2 rounded-xl border'
-                        type='text'
-                        name='location'
-                        onChange={handleChange}
-                        placeholder='Location'
-                        value={form.location}
-                    />
-                    <input
-                        className='p-2 rounded-xl border'
-                        type='text'
-                        name='logo'
-                        placeholder='Your logo'
-                        onChange={handleChange}
-                        value={form.logo}
-                    />
-
                 </div>
-
+                <textarea
+                    className='p-2 rounded-xl h-[13rem] border resize-none'
+                    name='description'
+                    placeholder='Describe your startup'
+                    onChange={handleChange}
+                    value={form.description}
+                />
+                <input
+                    className='p-2 rounded-xl border'
+                    type='text'
+                    name='location'
+                    onChange={handleChange}
+                    placeholder='Location'
+                    value={form.location}
+                />
+                <input
+                    className='p-2 rounded-xl border'
+                    type='text'
+                    name='logo'
+                    placeholder='Your logo'
+                    onChange={handleChange}
+                    value={form.logo}
+                />
 
                 <button onClick={handleSubmit} className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
                     Register
