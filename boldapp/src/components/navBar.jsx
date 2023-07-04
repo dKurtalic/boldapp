@@ -26,12 +26,23 @@ const NavBar = () => {
             <div className="menu flex px-[2.5rem] gap-8 text-[1.2rem]">
                 <li className="menuList hover:text-vibrantCoral "><Link to="/explore">Explore</Link></li>
 
-                {user && (<div>
-                    <div className='menuList hover:text-vibrantCoral'>
-                        <button onClick={handleClick}>Log out</button>
+                {user && (
+
+                    <div className='flex gap-8'>
+                        <div>
+                            <div>
+                                <Link to="/registerStartup"><li className="menuList hover:text-vibrantCoral">Register a startup</li></Link>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className='menuList hover:text-vibrantCoral'>
+                                <button onClick={handleClick}>Log out</button>
+                            </div>
+                            <div className=' text-xs'>{user.email}</div>
+                        </div>
+
                     </div>
-                    <div className=' text-xs'>{user.email}</div>
-                </div>
                 )}
 
                 {!user && (

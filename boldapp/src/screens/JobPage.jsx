@@ -94,7 +94,7 @@ const JobPage = () => {
                                 <div>
                                     <div className='flex  mb-3'>
                                         <TiLocation className='mr-2 text-xl text-black ' />
-                                        <div className=' font-semibold text-xl '>Join date</div>
+                                        <div className=' font-semibold text-xl '>Location</div>
                                     </div>
                                     <div className=' text-xl  mb-4 font-normal' >{startupData.location}</div>
                                 </div>
@@ -104,7 +104,7 @@ const JobPage = () => {
                                         <TiLocation className='mr-2 text-xl text-black ' />
                                         <div className=' font-semibold text-xl '>Join date</div>
                                     </div>
-                                    <div className=' text-xl  mb-4 font-medium' >05/05/2005</div>
+                                    <div className=' text-xl  mb-4 font-normal' >05/05/2005</div>
                                 </div>
 
                                 <div>

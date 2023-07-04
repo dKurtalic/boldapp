@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { GrUserManager, GrLocation } from 'react-icons/gr'
 
 const SearchComponent = () => {
+    const [sortBy, setSortBy] = useState('');
+
+    const handleSortByChange = (e) => {
+        setSortBy(e.target.value);
+        
+      };
     return (
         <div className="bg-lightMint grid p-[3rem] rounded-xl w-[90%] m-auto gp-10 gap-5 items-center ">
 
@@ -37,7 +43,8 @@ const SearchComponent = () => {
             <div className='flex flex-wrap items-center justify-center gap-16'>
                 <div>
                     <label htmlFor='relevance' className='text-midnightBlue font-semibold'>Sort by</label>
-                    <select name="" id="relevance" className="rounded-[10px] outline-none mx-5 px-5">
+                    <select name="" id="relevance" className="rounded-[10px] outline-none mx-5 px-5" value={sortBy}
+                        onChange={handleSortByChange}>
                         <option value="">Relevance</option>
                         <option value="">Date</option>
                     </select>

@@ -1,6 +1,13 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
+
+const memberSchema = new Schema({
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    position: { type: String }
+}, { _id: false });
+
+
 const startupSchema = new Schema({
     name: {
         type: String,
@@ -10,15 +17,8 @@ const startupSchema = new Schema({
         type: String,
         required: true
     },
-    founders: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-        required: true
-    },
     members: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
-    },
-    skillsNeeded: {
-        type: [String]
+        type: [memberSchema]
     },
     openPositions: {
         type: [{ type: Schema.Types.ObjectId, ref: 'Position' }]
@@ -43,6 +43,9 @@ const startupSchema = new Schema({
     },
     location: {
         type: String
+    },
+    foundingDate: {
+        type: Date
     }
 
 }, { timestamps: true });
