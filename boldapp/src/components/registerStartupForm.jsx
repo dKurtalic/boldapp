@@ -1,11 +1,20 @@
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../hooks/useAuthContex'
 
 const RegisterStartupForm = () => {
+    const [image, setImage] = useState()
+    const [isDragging, setIsDragging] = useState(false)
+    const fileInputRef = useRef()
+    const [error, setError] = useState(null)
+
+    function selectFiles() {
+        event.preventDefault()
+        fileInputRef.current.click()
+    }
     const { user } = useAuthContext()
     const formRef = useRef()
     const [form, setForm] = useState({
@@ -37,12 +46,13 @@ const RegisterStartupForm = () => {
             if (!form.name) console.log("name")
             if (!form.location) console.log("location")
             if (!form.description) console.log("description")
-            alert('Please fill in all required fields');
+            setError('Please fill in all required fields');
             return;
         }
+        else setError(null)
 
         setLoading(true);
-
+        form.logo = JSON.stringify(image).replace("blob:", "")
         try {
 
 
@@ -92,60 +102,147 @@ const RegisterStartupForm = () => {
 
         setLoading(false);
     };
+    function onFileSelect(event) {
+        if (!image) setImage(null)
+        const files = event.target.files;
+        if (checkImage(files)) { setImage(URL.createObjectURL(files[i])) }
+        else setError("Invalid image")
+        console.log("IMage je " + image)
+    }
+
+    function checkFiles(files) {
+        if (files.length == 0) { setError("Invalid image"); return false; }
+        if (files[0].type.split('/')[0] != 'image') { setError("Invalid image"); return false; }
+        return true;
+    }
+
+    function deleteImage(index) {
+        setImage(null)
+        setError(null)
+    }
+    function onDragOver(event) {
+
+        event.preventDefault()
+        setIsDragging(true)
+        event.dataTransfer.dropEffect = 'copy'
+    }
+    function onDragLeave(event) {
+        event.preventDefault()
+        setIsDragging(false)
+    }
+    function onDrop(event) {
+
+        event.preventDefault()
+        if (!image) setImage(null)
+        setError(null)
+        setIsDragging(false)
+
+        const files = event.dataTransfer.files
+        if (checkFiles(files)) setImage(URL.createObjectURL(files[0]))
+        else setError("Invalid image")
+
+
+    }
 
     return (
-        <div className='bg-lightGray w-96 mx-auto shadow-lg rounded-lg p-5'>
+        <div className='bg-lightGray w-[50%] mx-auto shadow-lg rounded-lg p-5'>
             <h2 className='font-bold text-textColor text-2xl lg:justify-end mb-7'>Register your startup</h2>
 
             <form
                 ref={formRef}
                 onSubmit={handleSubmit}
                 className='flex flex-col gap-4'>
-                <div className="grid grid-cols-2 gap-4">
-                    <input
-                        className='p-2 rounded-xl border'
-                        type='text'
-                        name='name'
-                        placeholder='Name'
-                        onChange={handleChange}
-                        value={form.name}
-                    />
-                    <input
-                        className='p-2 rounded-xl border'
-                        type='date'
-                        name='foundingDate'
-                        placeholder='Founding date'
-                        onChange={handleChange}
-                        value={form.foundingDate}
-                    />
-                </div>
-                <textarea
-                    className='p-2 rounded-xl h-[13rem] border resize-none'
-                    name='description'
-                    placeholder='Describe your startup'
-                    onChange={handleChange}
-                    value={form.description}
-                />
-                <input
-                    className='p-2 rounded-xl border'
-                    type='text'
-                    name='location'
-                    onChange={handleChange}
-                    placeholder='Location'
-                    value={form.location}
-                />
-                <input
-                    className='p-2 rounded-xl border'
-                    type='text'
-                    name='logo'
-                    placeholder='Your logo'
-                    onChange={handleChange}
-                    value={form.logo}
-                />
+                <div className='flex flex-row'>
+                    <div>
+                        <div className="grid grid-cols-2 ">
+                            <input
+                                className='p-2 rounded-xl border m-3'
+                                type='text'
+                                name='name'
+                                placeholder='Name'
+                                onChange={handleChange}
+                                value={form.name}
+                            />
+                            <input
+                                className='p-2 rounded-xl border m-3'
+                                type='date'
+                                name='foundingDate'
+                                placeholder='Founding date'
+                                onChange={handleChange}
+                                value={form.foundingDate}
+                            />
+                        </div>
 
-                <button onClick={handleSubmit} className='bg-navyBlue rounded-xl text-white py-2 hover:scale-105 duration-300'>
-                    Register
-                </button>
+
+                        <input
+                            className='p-2 rounded-xl border m-3'
+                            type='text'
+                            name='location'
+                            onChange={handleChange}
+                            placeholder='Location'
+                            value={form.location}
+                        />
+
+                        <textarea
+                            className='p-2 rounded-xl h-[5rem] w-[30rem] border m-3 '
+                            name='description'
+                            placeholder='Describe your startup'
+                            onChange={handleChange}
+                            value={form.description}
+                        />
+                    </div>
+                    <div className=''>
+                        <div className='drag-area p-2 none rounded-xl h-[13rem] w-[15rem] m-3 border-dashed border-gray border-[2px] bg-slate-200 flex justify-center items-center select-none mt-[10px]' onDrop={onDrop}
+                            onDragLeave={onDragLeave}
+                            onDragOver={onDragOver} >
+                            {
+                                isDragging ? (
+                                    <div>Drop image here</div>
+                                ) : (
+                                    <div className='text-center'>
+                                        <div className='m-2'>Drag & Drop your logo here</div>
+                                        <div className='m-2'>or</div>
+                                        <button className='select m-2 border-[1px] border-gray p-2 rounded-xl' role='button' onClick={selectFiles}>
+                                            Browse
+                                        </button>
+                                    </div>
+                                )
+                            }
+                            <input
+                                id='myFileInput'
+                                accept='image/*'
+                                className='dragndrop '
+                                type='file'
+                                name='logo'
+                                value={form.logo}
+                                multiple ref={fileInputRef}
+                                onChange={onFileSelect}
+
+                            />
+                        </div>
+
+                        <div className='p-2'>
+
+                            {image && error == null && <div>
+                                <div>Uploaded image:</div>
+                                <div className='flex justify-between'>
+                                    <img src={image} className='h-[2rem]' />
+                                    <button onClick={deleteImage}>Delete image</button>
+                                </div>
+                            </div>}
+                            {error && (
+                                <div>{error}</div>
+                            )}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className=' text-center'>
+                    <button onClick={handleSubmit} className='bg-navyBlue my-3  rounded-xl w-[30%] text-white py-2 hover:scale-105 duration-300'>
+                        Register
+                    </button>
+                </div>
             </form>
 
 

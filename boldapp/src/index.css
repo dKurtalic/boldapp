@@ -73,3 +73,9 @@ ul.specialBullets li:before {
   background-image: url("./res/check.png");
   background-size: cover;
 }
+
+.drag-area.dragover .visible,
+.drag-area.on-drop,
+.drag-area input {
+  display: none;
+}
