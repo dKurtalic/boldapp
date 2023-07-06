@@ -14,7 +14,7 @@ const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, l
 
     const getPositionsAtStartup = async () => {
         try {
-            const response = await fetch(`http://localhost:4000/startup/${_id}/positions`)
+            const response = await fetch(`https://boldapp.onrender.com/startup/${_id}/positions`)
             if (response.ok) {
                 const positions = await response.json()
                 console.log("e ovdje sad imam ")

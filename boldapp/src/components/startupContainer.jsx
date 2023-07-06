@@ -12,7 +12,7 @@ const StartupContainer = () => {
 
     const [startupData, setStartupData] = useState(null)
     const fetchStartupData = async () => {
-        const response = await fetch("http://localhost:4000/startups")
+        const response = await fetch("https://boldapp.onrender.com/startups")
         const json = await response.json()
 
         if (response.ok) {
