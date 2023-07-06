@@ -39,6 +39,7 @@ const RegisterStartupForm = () => {
     };
 
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,7 +53,7 @@ const RegisterStartupForm = () => {
         else setError(null)
 
         setLoading(true);
-        form.logo = JSON.stringify(image).replace("blob:", "")
+
         try {
 
 
@@ -73,7 +74,6 @@ const RegisterStartupForm = () => {
                 console.log("ejoj");
             }
 
-
             const response = await fetch('http://localhost:4000/startup/create', {
                 method: 'POST',
                 headers: {
@@ -83,7 +83,7 @@ const RegisterStartupForm = () => {
                     name: form.name,
                     description: form.description,
                     members: [{ user: founder, position: "Founder" }],
-                    logo: form.logo
+                    logo: image
                 }),
             });
 
@@ -97,18 +97,31 @@ const RegisterStartupForm = () => {
                 console.error('Registration failed:' + errorData.error);
             }
         } catch (error) {
-            console.error('Error:' + error.message);
+            console.error(error.message);
         }
 
         setLoading(false);
     };
+
     function onFileSelect(event) {
         if (!image) setImage(null)
         const files = event.target.files;
-        if (checkImage(files)) { setImage(URL.createObjectURL(files[i])) }
-        else setError("Invalid image")
-        console.log("IMage je " + image)
-    }
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+
+        var reader = new FileReader()
+        reader.readAsDataURL(files[0])
+        reader.onload = () => {
+            setImage(reader.result)
+            console.log("IMAGE : " + image)
+
+        }
+        reader.onerror = error => {
+            console.log("Error " + error);
+        }
+
+    };
+
 
     function checkFiles(files) {
         if (files.length == 0) { setError("Invalid image"); return false; }
@@ -138,21 +151,32 @@ const RegisterStartupForm = () => {
         setIsDragging(false)
 
         const files = event.dataTransfer.files
-        if (checkFiles(files)) setImage(URL.createObjectURL(files[0]))
-        else setError("Invalid image")
+        if (!checkFiles(files)) setError("Invalid image")
+        else {
+            var reader = new FileReader()
+            reader.readAsDataURL(files[0])
+            reader.onload = () => {
+                console.log(reader.result)
+                setImage(reader.result)
+            }
+            reader.onerror = error => {
+                console.log("Error " + error);
+            }
 
+            console.log(files[0])
 
+        }
     }
 
     return (
-        <div className='bg-lightGray w-[50%] mx-auto shadow-lg rounded-lg p-5'>
+        <div className='bg-lightGray lg:w-[55%] lg:h-[50%]   lg:pr-10 mx-auto shadow-lg rounded-lg p-5'>
             <h2 className='font-bold text-textColor text-2xl lg:justify-end mb-7'>Register your startup</h2>
 
             <form
                 ref={formRef}
                 onSubmit={handleSubmit}
-                className='flex flex-col gap-4'>
-                <div className='flex flex-row'>
+                className='flex flex-col flex-wrap gap-4'>
+                <div className='flex flex-row flex-wrap'>
                     <div>
                         <div className="grid grid-cols-2 ">
                             <input
@@ -184,7 +208,7 @@ const RegisterStartupForm = () => {
                         />
 
                         <textarea
-                            className='p-2 rounded-xl h-[5rem] w-[30rem] border m-3 '
+                            className='p-2 rounded-xl h-[5rem] sm:w-[100%]  lg:w-[95%] border m-3 '
                             name='description'
                             placeholder='Describe your startup'
                             onChange={handleChange}
@@ -192,14 +216,14 @@ const RegisterStartupForm = () => {
                         />
                     </div>
                     <div className=''>
-                        <div className='drag-area p-2 none rounded-xl h-[13rem] w-[15rem] m-3 border-dashed border-gray border-[2px] bg-slate-200 flex justify-center items-center select-none mt-[10px]' onDrop={onDrop}
+                        <div className='drag-area  p-2 none rounded-xl h-[90%] w-[100%] m-3 border-dashed border-gray border-[2px] bg-slate-200 flex justify-center items-center select-none mt-[10px]' onDrop={onDrop}
                             onDragLeave={onDragLeave}
                             onDragOver={onDragOver} >
                             {
                                 isDragging ? (
                                     <div>Drop image here</div>
                                 ) : (
-                                    <div className='text-center'>
+                                    <div className='text-center  lg:block md:flex sm:flex'>
                                         <div className='m-2'>Drag & Drop your logo here</div>
                                         <div className='m-2'>or</div>
                                         <button className='select m-2 border-[1px] border-gray p-2 rounded-xl' role='button' onClick={selectFiles}>

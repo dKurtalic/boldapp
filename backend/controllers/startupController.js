@@ -8,9 +8,9 @@ const checkId = (id) => {
     }
 }
 const createStartup = async (req, res) => {
-    const { name, description } = req.body
+    const { name, description, logo, location } = req.body
     try {
-        const newStartup = await Startup.create({ name, description, ...req.body })
+        const newStartup = await Startup.create({ name, description, logo, ...req.body })
         res.status(200).json(newStartup)
     } catch (error) {
         res.status(400).json({ error: error.message })
