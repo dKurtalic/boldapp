@@ -22,10 +22,10 @@ const JobPage = () => {
     const { startupName, jobId } = useParams()
 
 
-    const jobUrl = "https://boldapp.onrender.com/position/" + jobId;
+    const jobUrl = "http://localhost:4000/position/" + jobId;
 
 
-    const startupurl = "https://boldapp.onrender.com/startupDetails/" + startupName;
+    const startupurl = "http://localhost:4000/startupDetails/" + startupName;
     const [jobData, setJobData] = useState(null)
     const [startupData, setStartupData] = useState(null)
 

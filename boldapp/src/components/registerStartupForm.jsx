@@ -57,7 +57,7 @@ const RegisterStartupForm = () => {
         try {
 
 
-            const founderUrl = 'https://boldapp.onrender.com/userByEmail/' + user.email;
+            const founderUrl = 'http://localhost:4000/' + user.email;
             console.log("Founder url " + founderUrl)
             let founder = null;
             const founderResponse = await fetch(founderUrl, {
@@ -74,7 +74,7 @@ const RegisterStartupForm = () => {
                 console.log("ejoj");
             }
 
-            const response = await fetch('https://boldapp.onrender.com/startup/create', {
+            const response = await fetch('http://localhost:4000/startup/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
