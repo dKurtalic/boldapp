@@ -4,9 +4,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import slika from '../res/paypalLogo.jpg'
 import { TfiLocationPin } from 'react-icons/tfi'
 import createDateFromString from '../functions/dateFromString'
-import StartupCard from './startupCard'
-
-
+import StartupCard from '../components/StartupCard'
 
 const StartupContainer = () => {
 
