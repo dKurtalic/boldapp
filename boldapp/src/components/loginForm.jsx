@@ -44,7 +44,7 @@ const LoginForm = () => {
 
                 setLoading(false);
                 console.log('Logged in');
-                window.location.href = '/explore'
+                window.location.href = 'https://startapp-bold.netlify.app/explore'
             } else {
                 setLoading(false)
                 setError("Log in failed")
