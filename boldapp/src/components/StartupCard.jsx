@@ -4,6 +4,8 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import slika from '../res/paypalLogo.jpg'
 import { TfiLocationPin } from 'react-icons/tfi'
 import createDateFromString from '../functions/dateFromString';
+import { useNavigate } from "react-router-dom";
+
 
 
 const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, location }) => {
@@ -11,6 +13,11 @@ const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, l
     const [positions, setPositions] = useState(null)
     const date = createDateFromString(createdAt);
     const url = "/startupDetails/" + name;
+    const navigate = useNavigate();
+
+    const handleNavigation = () => {
+        navigate(url);
+    };
 
     const getPositionsAtStartup = async () => {
         try {
@@ -35,29 +42,29 @@ const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, l
     return (
 
         <div className='group inline-block w-[400px] m-7 p-5 shadow-md shadow-slate-400 rounded-lg hover:bg-googlePlava'>
-            <a href={url}>
-                <div className='flex'>
-                    {logo ? <img src={logo} alt="logo" className='h-20 w-20 rounded-md mr-3' /> : <img src={slika} alt="logo" className='h-20 w-20 rounded-md mr-3' />
-                    }
-                    <div className='flex justify-between w-full'>
-                        <div className=''>
-                            <div className='flex justify-between'>
-                                <h1 className='font-bold text-textColor group-hover:text-white text-[1.5rem] break-all'>{name}</h1>
-                            </div>
-                            <div className='flex '>
-                                <TfiLocationPin className='text-gray mr-2 mt-1 text-[15px] items-center' />
-                                <h6 className='text-gray group-hover:text-white text-[15px]'>{location}</h6>
-                            </div>
-                        </div>
-                        < AiOutlineHeart className='text-[30px] hover:text-white m-1' />
-                    </div>
 
+            <div className='flex' onClick={handleNavigation}>
+                {logo ? <img src={logo} alt="logo" className='h-20 w-20 rounded-md mr-3' /> : <img src={slika} alt="logo" className='h-20 w-20 rounded-md mr-3' />
+                }
+                <div className='flex justify-between w-full'>
+                    <div className=''>
+                        <div className='flex justify-between'>
+                            <h1 className='font-bold text-textColor group-hover:text-white text-[1.5rem] break-all'>{name}</h1>
+                        </div>
+                        <div className='flex '>
+                            <TfiLocationPin className='text-gray mr-2 mt-1 text-[15px] items-center' />
+                            <h6 className='text-gray group-hover:text-white text-[15px]'>{location}</h6>
+                        </div>
+                    </div>
+                    < AiOutlineHeart className='text-[30px] hover:text-white m-1' />
                 </div>
-                <div className="border-t-2 mt-8 border-gray group-hover:border-white"></div>
-                <div className='text-gray group-hover:text-white mt-3 ' >
-                    {description.length > 100 ? description.slice(0, 100) + "..." : description}
-                </div>
-            </a>
+
+            </div>
+            <div className="border-t-2 mt-8 border-gray group-hover:border-white"></div>
+            <div className='text-gray group-hover:text-white mt-3 ' >
+                {description.length > 100 ? description.slice(0, 100) + "..." : description}
+            </div>
+
 
             <div className='positions pt-3 space-x-2 space-y-2 text-[13px] font-semibold text-gray'>
                 {
@@ -65,7 +72,7 @@ const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, l
                         return (
                             <button key={index}
                                 className='rounded-md bg-lightGray inline-block p-2'
-                                onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position._id}` }}>
+                                onClick={() => { navigate(`/startupDetails/${startupData.name}/${position._id}`) }}>
                                 {element.jobTitle}
                             </button>)
 
