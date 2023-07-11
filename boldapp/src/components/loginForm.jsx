@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { useAuthContext } from '../hooks/useAuthContex'
 import { useRef, useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
+    const navigate = useNavigate();
     const { dispatch } = useAuthContext()
     const formRef = useRef()
     const [form, setForm] = useState({
@@ -44,7 +45,7 @@ const LoginForm = () => {
 
                 setLoading(false);
                 console.log('Logged in');
-                window.location.href = 'https://startapp-bold.netlify.app/explore'
+                navigate('/explore')
             } else {
                 setLoading(false)
                 setError("Log in failed")

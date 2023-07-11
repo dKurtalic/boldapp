@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import StartupHeader from '../components/startupHeader'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { TiLocation } from 'react-icons/ti'
 import createDateFromString from '../functions/dateFromString';
 
 
 const StartupPage = () => {
+    const navigate = useNavigate();
     const { startupName } = useParams()
 
     const url = "https://long-tan-firefly-tam.cyclic.app/startupDetails/" + startupName;
@@ -118,7 +119,7 @@ const StartupPage = () => {
                             {
 
                                 positions.map((position) => {
-                                    return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position._id}` }}>
+                                    return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { navigate(`/startupDetails/${startupData.name}/${position._id}`) }}>
                                         {position.jobTitle}
                                     </button>
                                 })
@@ -144,11 +145,3 @@ const StartupPage = () => {
 
 export default StartupPage
 
-/* {
-                            positions &&
-                            positions.map((position) => {
-                                return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { window.location.href = `/startupDetails/${startupData.name}/${position.jobTitle}` }}>
-                                    {position.jobTitle}
-                                </button>
-                            })
-                        } */

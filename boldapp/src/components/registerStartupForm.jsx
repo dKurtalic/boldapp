@@ -2,10 +2,11 @@ import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from '../hooks/useAuthContex'
 
 const RegisterStartupForm = () => {
+    const navigate = useNavigate();
     const [image, setImage] = useState()
     const [isDragging, setIsDragging] = useState(false)
     const fileInputRef = useRef()
@@ -90,7 +91,7 @@ const RegisterStartupForm = () => {
             if (response.ok) {
                 const newStartup = await response.json();
                 const url = '/startupDetails/' + newStartup.name
-                window.location.href = url
+                navigate(url)
 
             } else {
                 const errorData = await response.json();
