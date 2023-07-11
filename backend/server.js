@@ -1,7 +1,9 @@
 const express = require('express')
 const routes = require('./routes')
 const mongoose = require('mongoose')
+const path = require('path')
 require('dotenv').config()
+
 
 const app = express()
 
@@ -14,5 +16,10 @@ mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true }).then(() =>
     })
 }).catch((error) => {
     console.log(error)
+})
+
+app.use(express.static('./build'))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(_dirname, "client"))
 })
 
