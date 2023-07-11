@@ -1,16 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
 import forgotPasswordPhoto from '../res/forgotPass.jpg'
+import { useNavigate } from "react-router-dom";
 function ForgotPassword() {
     const [email, setEmail] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // TODO: Add logic to send password reset email
-        // You can use the 'email' state variable to access the user's input
 
-        // Clear the form input after submitting
         setEmail('');
     };
 
@@ -36,8 +34,8 @@ function ForgotPassword() {
                             Reset Password
                         </button>
                     </form>
-                    <div className='mt-5 text-xs border-navyBlue py-4 text-navyBlue'>
-                        <a href='/signin'>Back to Login</a>
+                    <div className='mt-5 text-xs border-navyBlue py-4 text-navyBlue' onClick={() => { navigate('/signin') }}>
+                        Back to Login
                     </div>
                 </div>
             </div>
