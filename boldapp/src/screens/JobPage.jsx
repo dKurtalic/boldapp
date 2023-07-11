@@ -22,10 +22,10 @@ const JobPage = () => {
     const { startupName, jobId } = useParams()
 
 
-    const jobUrl = "http://localhost:4000/position/" + jobId;
+    const jobUrl = "https://long-tan-firefly-tam.cyclic.app/position/" + jobId;
 
 
-    const startupurl = "http://localhost:4000/startupDetails/" + startupName;
+    const startupurl = "https://long-tan-firefly-tam.cyclic.app/startupDetails/" + startupName;
     const [jobData, setJobData] = useState(null)
     const [startupData, setStartupData] = useState(null)
 

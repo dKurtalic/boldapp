@@ -51,7 +51,7 @@ const RegistrationForm = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:4000/users/register', {
+            const response = await fetch('https://long-tan-firefly-tam.cyclic.app/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

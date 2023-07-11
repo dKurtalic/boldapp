@@ -9,7 +9,7 @@ import createDateFromString from '../functions/dateFromString';
 const StartupPage = () => {
     const { startupName } = useParams()
 
-    const url = "http://localhost:4000/startupDetails/" + startupName;
+    const url = "https://long-tan-firefly-tam.cyclic.app/startupDetails/" + startupName;
     const [startupData, setStartupData] = useState(null);
     const [positions, setPositions] = useState(null);
     const [date, setDate] = useState(null)
@@ -30,7 +30,7 @@ const StartupPage = () => {
     const getPositionsAtStartup = async () => {
 
         if (startupData) {
-            const response = await fetch(`http://localhost:4000/startup/${startupData._id}/positions`)
+            const response = await fetch(`https://long-tan-firefly-tam.cyclic.app/startup/${startupData._id}/positions`)
             if (response.ok) {
                 const positions = await response.json()
                 console.log("e ovdje sad imam ")
