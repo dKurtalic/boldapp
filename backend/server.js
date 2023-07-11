@@ -18,8 +18,4 @@ mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true }).then(() =>
     console.log(error)
 })
 
-app.use(express.static('./build'))
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(_dirname, "client"))
-})
 
