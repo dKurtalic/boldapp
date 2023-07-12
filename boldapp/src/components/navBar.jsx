@@ -23,12 +23,12 @@ const NavBar = () => {
 
             </div>
             </Link>
-            <div className="menu flex px-[2.5rem] gap-8 text-[1.2rem]">
-                <li className="menuList hover:text-vibrantCoral "><Link to="/explore">Explore</Link></li>
+            <div className="menu flex flex-wrap lg:px-[2.5rem] sm:px-[0.9rem] gap-8 sm:gap-4 text-[1.2rem]">
+                <li className="menuList mt-1.5 hover:text-vibrantCoral mx-2"><Link to="/explore">Explore</Link></li>
 
                 {user && (
 
-                    <div className='flex gap-8'>
+                    <div className='flex flex-wrap   items-center gap-8'>
                         <div>
                             <div>
                                 <Link to="/registerStartup"><li className="menuList hover:text-vibrantCoral">Register a startup</li></Link>

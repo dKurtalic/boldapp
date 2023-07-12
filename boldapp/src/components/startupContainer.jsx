@@ -24,7 +24,7 @@ const StartupContainer = () => {
 
 
     return (
-        <div className='m-auto grid grid-cols-[repeat(auto-fit,minmax(410px,1fr))] gap-2 justify-items-center w-[95%]'>
+        <div className='m-auto grid grid-cols-[repeat(auto-fit,minmax(410px,1fr))] gap-2 justify-items-center lg:w-[95%]'>
             {
                 startupData && startupData.map(({ _id, name, description, openPositions, createdAt, logo, location }) => {
                     return <StartupCard _id={_id} name={name} description={description} openPositions={openPositions} createdAt={createdAt} logo={logo} location={location} />

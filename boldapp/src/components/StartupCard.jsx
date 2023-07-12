@@ -37,11 +37,10 @@ const StartupCard = ({ _id, name, description, openPositions, createdAt, logo, l
     useEffect(() => {
         getPositionsAtStartup()
     }, [])
-    console.log("FINALNO ")
-    console.log(positions)
+
     return (
 
-        <div className='group inline-block w-[400px] m-7 p-5 shadow-md shadow-slate-400 rounded-lg hover:bg-googlePlava'>
+        <div className='group inline-block m-7 p-5 shadow-md shadow-slate-400 rounded-lg hover:bg-googlePlava'>
 
             <div className='flex' onClick={handleNavigation}>
                 {logo ? <img src={logo} alt="logo" className='h-20 w-20 rounded-md mr-3' /> : <img src={slika} alt="logo" className='h-20 w-20 rounded-md mr-3' />

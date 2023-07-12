@@ -263,7 +263,7 @@ const RegisterStartupForm = () => {
 
                 </div>
 
-                <div className=' text-center'>
+                <div className='mt-10 text-center'>
                     <button onClick={handleSubmit} className='bg-navyBlue my-3  rounded-xl w-[30%] text-white py-2 hover:scale-105 duration-300'>
                         Register
                     </button>
