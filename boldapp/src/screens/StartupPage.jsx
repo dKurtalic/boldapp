@@ -58,8 +58,8 @@ const StartupPage = () => {
                 <div className='mb-20 justify-center items-center'>
                     <StartupHeader coverPhoto={startupData.coverPhoto} name={startupData.name} logo={startupData.logo} />
 
-                    <div className='mt-10 gap-[3rem] flex justify-center'>
-                        <div className='flex  w-[50%]'>
+                    <div className='mt-10 gap-[3rem] lg:flex md:flex  justify-center'>
+                        <div className='flex lg:w-[50%] md:w-[70%] sm:w-[80%] mx-10'>
                             <div>
                                 <div className=' font-medium text-lg mb-4'>Description</div>
                                 <div>{startupData.description}</div>
@@ -68,7 +68,7 @@ const StartupPage = () => {
 
                         <div className=' border-l-2 border-gray ' />
 
-                        <div className='grid grid-flow-row gap-5'>
+                        <div className='grid grid-flow-row gap-5 mx-10 mt-10 lg:mt-0'>
                             <div className=' font-bold text-xl mb-3'> About</div>
 
                             <div>
@@ -114,12 +114,12 @@ const StartupPage = () => {
                     }
 
                     {positions && positions.length > 0 ? (
-                        < div className=' ml-[10rem]'>
+                        < div className='lg:ml-[10rem] ml-10'>
                             <div className='mt-10 text-xl font-semibold mb-5'>Positions needed:</div>
                             {
 
                                 positions.map((position) => {
-                                    return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5' onClick={() => { navigate(`/startupDetails/${startupData.name}/${position._id}`) }}>
+                                    return <button className='rounded-full mx-4 bg-googlePlava px-5 py-5 mt-5' onClick={() => { navigate(`/startupDetails/${startupData.name}/${position._id}`) }}>
                                         {position.jobTitle}
                                     </button>
                                 })
@@ -132,7 +132,7 @@ const StartupPage = () => {
 
 
                     <div style={{ position: 'relative' }}>
-                        <div className='flex justify-end items-end  bottom-0 right-0 mb-5 mr-5'>
+                        <div className='flex justify-end lg:items-end  lg:bottom-0 lg:right-0 mb-5 mr-5 mt-5 '>
                             <div className='bottom-5 right-5'> <button className='rounded-full mx-4 bg-googlePlava px-10 text-white py-5'>APPLY</button></div>
                         </div>
                     </div>
