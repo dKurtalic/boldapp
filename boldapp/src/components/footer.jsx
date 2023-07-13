@@ -7,9 +7,9 @@ import { TfiLocationPin } from 'react-icons/tfi'
 const Footer = () => {
     return (
         <div className='bg-googlePlava w-[90%] rounded-xl p-[2rem] my-[2rem] mx-auto justify-between flex flex-wrap'>
-            <div className='w-[40%]'>
+            <div className='lg:w-[40%]'>
                 <h1 className='text-[2rem] font-bold text-white'>Let's start something great</h1>
-                <div className='text-lightGray mt-6'>
+                <div className='text-lightGray mt-6 '>
                     Connect with co-founders and teammates for your startup journey. Find the perfect match for your startup's success. Join our platform and collaborate with like-minded individuals, turning ideas into reality.
                 </div>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
 
             <div className=''>
                 <div className='flex items-center'>
-                    <img src={logo} alt="logo" className='w-[4rem] h-[4rem]' />
+                    <img src={logo} alt="logo" className='w-[4rem] h-[4rem] mt-5' />
                     <h1 className='logo text-[25px] text-textColor pl-3'>
                         <strong>Start</strong>App
                     </h1>

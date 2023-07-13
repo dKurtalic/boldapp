@@ -9,9 +9,9 @@ import Footer from '../components/footer'
 const LandingPage = () => {
     return (
         <div >
-            <div className='w-[90%] justify-between items-center m-auto'>
-                <div className='flex justify-center items-center bg-cover bg-center bg-no-repeat h-[30rem]  bg-lightBackground rounded-3xl mx-10 ' style={{ backgroundImage: `url(${coverPhoto})` }}>
-                    <div className='text-center  '>
+            <div className='w-[96%] justify-between items-center m-auto'>
+                <div className='flex justify-center items-center bg-cover bg-center bg-no-repeat h-[30rem]  bg-lightBackground rounded-3xl  ' style={{ backgroundImage: `url(${coverPhoto})` }}>
+                    <div className='text-center mx-6 '>
                         <h2 className='text-5xl text-white pb-12'>Build the perfect startup squad </h2>
                         <h3 className='text-2xl text-white font-semibold'>Connect with co-founders and teammates</h3>
                     </div>
@@ -21,10 +21,10 @@ const LandingPage = () => {
                     <h4 className='text-xl pt-9'>How it works?</h4>
                     <h1 className='text-3xl font-bold pt-1'>It only takes a few minutes to get started on StartApp</h1>
 
-                    <div className='flex justify-center items-center'>
+                    <div className='flex flex-wrap lg:flex-nowrap justify-center items-center'>
 
-                        <div className='items-center justify-center px-10 flex flex-col '>
-                            <div className='m-5 '>
+                        <div className='items-center justify-center px-10  flex flex-col '>
+                            <div className='m-5 mt-5 '>
                                 <img src={ellipse1} className='h-[8rem] max-w-full rounded-full' alt="" />
                             </div>
                             <div className='text-center'>
