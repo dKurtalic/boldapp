@@ -2,12 +2,11 @@ import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 
 const RegistrationForm = () => {
-
+    const navigate = useNavigate();
     const formRef = useRef()
     const [form, setForm] = useState({
         fullName: '',
@@ -19,6 +18,7 @@ const RegistrationForm = () => {
         occupation: '',
         password: ''
     })
+
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
@@ -72,6 +72,8 @@ const RegistrationForm = () => {
             if (response.ok) {
                 const newUser = await response.json();
                 console.log('New user created:', newUser);
+
+                navigate('/explore')
             } else {
                 const errorData = await response.json();
                 console.error('Registration failed:' + errorData.error);
